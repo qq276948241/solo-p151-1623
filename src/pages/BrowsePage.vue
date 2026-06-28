@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed, ref, toRef } from 'vue'
 import BookCard from '@/components/BookCard.vue'
 import BookDetailModal from '@/components/BookDetailModal.vue'
 import { useBorrowStore } from '@/stores/borrowStore'
-import type { Book, SortType } from '@/types'
+import { useBookFilter } from '@/composables/useBookFilter'
+import type { Book } from '@/types'
 import categoriesData from '@/data/categories.json'
 import { Search, Filter, ArrowUpDown, BookOpen, X } from 'lucide-vue-next'
 
@@ -11,46 +12,26 @@ const store = useBorrowStore()
 
 const selectedBook = ref<Book | null>(null)
 const showModal = ref(false)
-const searchQuery = ref('')
-const selectedCategory = ref<string>('all')
-const sortBy = ref<SortType>('borrowCount')
 
-const sortOptions = [
-  { value: 'borrowCount', label: '借阅次数' },
-  { value: 'title', label: '书名' },
-  { value: 'newest', label: '最新上架' }
-]
+const booksRef = toRef(store, 'books')
+const {
+  searchQuery,
+  selectedCategory,
+  sortBy,
+  filteredBooks,
+  sortOptions,
+  clearSearch,
+  setCategory
+} = useBookFilter(booksRef)
 
-const filteredBooks = computed(() => {
-  let books = [...store.books]
-  
-  if (selectedCategory.value !== 'all') {
-    books = books.filter(b => b.categoryId === selectedCategory.value)
-  }
-  
-  if (searchQuery.value.trim()) {
-    const query = searchQuery.value.toLowerCase()
-    books = books.filter(b => 
-      b.title.toLowerCase().includes(query) ||
-      b.author.toLowerCase().includes(query)
-    )
-  }
-  
-  if (sortBy.value === 'borrowCount') {
-    books.sort((a, b) => b.borrowCount - a.borrowCount)
-  } else if (sortBy.value === 'title') {
-    books.sort((a, b) => a.title.localeCompare(b.title, 'zh-CN'))
-  }
-  
-  return books
-})
+const hasSearch = computed(() => searchQuery.value.trim().length > 0)
 
-const handleBookClick = (book: Book) => {
+function handleBookClick(book: Book) {
   selectedBook.value = book
   showModal.value = true
 }
 
-const handleCloseModal = () => {
+function handleCloseModal() {
   showModal.value = false
   setTimeout(() => {
     selectedBook.value = null
@@ -76,7 +57,7 @@ const handleCloseModal = () => {
               :class="selectedCategory === 'all' 
                 ? 'bg-primary-600 text-white' 
                 : 'bg-cream-100 text-primary-600 hover:bg-cream-200'"
-              @click="selectedCategory = 'all'"
+              @click="setCategory('all')"
             >
               全部
             </button>
@@ -87,7 +68,7 @@ const handleCloseModal = () => {
               :class="selectedCategory === cat.id 
                 ? 'bg-primary-600 text-white' 
                 : 'bg-cream-100 text-primary-600 hover:bg-cream-200'"
-              @click="selectedCategory = cat.id"
+              @click="setCategory(cat.id)"
             >
               {{ cat.name }}
             </button>
@@ -117,10 +98,10 @@ const handleCloseModal = () => {
           class="w-full pl-12 pr-11 py-3 rounded-xl bg-cream-100 border-2 border-primary-200 text-primary-800 placeholder:text-primary-400 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition-all duration-200"
         />
         <button
-          v-if="searchQuery.trim()"
+          v-if="hasSearch"
           type="button"
           class="absolute right-3 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-primary-100 hover:bg-primary-200 text-primary-600 flex items-center justify-center transition-all duration-200"
-          @click="searchQuery = ''"
+          @click="clearSearch"
         >
           <X class="w-4 h-4" />
         </button>

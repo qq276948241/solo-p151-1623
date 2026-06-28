@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import type { Book, BookWithBorrow } from '@/types'
 import { getStatusText, getStatusClass, isDueSoon, formatDate, getDaysUntilDue } from '@/utils/date'
 import { MapPin, Calendar, AlertCircle } from 'lucide-vue-next'
-import { cn } from '@/utils/date'
 
 interface Props {
   book: Book | BookWithBorrow
@@ -18,8 +17,6 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<{
   click: []
 }>()
-
-const isHovered = ref(false)
 
 const borrowRecord = computed(() => {
   return 'borrowRecord' in props.book ? props.book.borrowRecord : undefined
@@ -49,7 +46,7 @@ const displayStatusClass = computed(() => {
   return getStatusClass(props.book.status)
 })
 
-const handleClick = () => {
+function handleClick() {
   emit('click')
   if (props.onClick) props.onClick()
 }
@@ -59,8 +56,7 @@ const handleClick = () => {
   <div
     class="book-card relative group"
     :class="{ 'card-due-soon': showDueSoonWarning }"
-    @mouseenter="isHovered = true"
-    @mouseleave="isHovered = false"
+    v-tooltip="book.description"
     @click="handleClick"
   >
     <div class="aspect-[3/4] relative overflow-hidden bg-cream-200">
@@ -70,7 +66,7 @@ const handleClick = () => {
         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
       />
       <div
-        class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
       />
       <div
         class="absolute top-3 right-3 z-10"
@@ -96,15 +92,6 @@ const handleClick = () => {
             已逾期
           </span>
         </span>
-      </div>
-
-      <div
-        v-show="isHovered"
-        class="absolute inset-0 p-4 flex flex-col justify-end text-white transform transition-all duration-300"
-      >
-        <p class="text-sm line-clamp-4 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
-          {{ book.description }}
-        </p>
       </div>
     </div>
 
