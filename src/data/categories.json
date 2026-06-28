@@ -1,0 +1,32 @@
+[
+  {
+    "id": "cat-001",
+    "name": "文学小说",
+    "icon": "BookOpen"
+  },
+  {
+    "id": "cat-002",
+    "name": "科技编程",
+    "icon": "Code"
+  },
+  {
+    "id": "cat-003",
+    "name": "历史人文",
+    "icon": "Landmark"
+  },
+  {
+    "id": "cat-004",
+    "name": "生活艺术",
+    "icon": "Palette"
+  },
+  {
+    "id": "cat-005",
+    "name": "儿童读物",
+    "icon": "Baby"
+  },
+  {
+    "id": "cat-006",
+    "name": "经济管理",
+    "icon": "TrendingUp"
+  }
+]

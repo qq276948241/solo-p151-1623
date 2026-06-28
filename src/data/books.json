@@ -1,0 +1,167 @@
+[
+  {
+    "id": "book-001",
+    "title": "百年孤独",
+    "author": "加西亚·马尔克斯",
+    "cover": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=book%20cover%20art%20of%20vintage%20magical%20realism%20novel%20with%20butterflies%20and%20old%20house&image_size=square_hd",
+    "description": "《百年孤独》是魔幻现实主义文学的代表作，描写了布恩迪亚家族七代人的传奇故事，以及加勒比海沿岸小镇马孔多的百年兴衰。",
+    "categoryId": "cat-001",
+    "location": "A区-3层-12号",
+    "borrowCount": 156,
+    "status": "available"
+  },
+  {
+    "id": "book-002",
+    "title": "活着",
+    "author": "余华",
+    "cover": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=book%20cover%20art%20minimalist%20chinese%20literary%20novel%20about%20life%20and%20survival&image_size=square_hd",
+    "description": "讲述了农村人福贵悲惨的人生遭遇。余华用冷静的笔触，描绘了一个人和他的命运之间的友情，讲述了人如何去承受巨大的苦难。",
+    "categoryId": "cat-001",
+    "location": "A区-2层-05号",
+    "borrowCount": 203,
+    "status": "borrowed"
+  },
+  {
+    "id": "book-003",
+    "title": "JavaScript高级程序设计",
+    "author": "Nicholas C. Zakas",
+    "cover": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=book%20cover%20tech%20programming%20javascript%20code%20on%20dark%20background%20modern&image_size=square_hd",
+    "description": "JavaScript技术经典著作，全面深入地介绍了JavaScript语言核心和DOM、BOM等浏览器API，是前端开发者必读之作。",
+    "categoryId": "cat-002",
+    "location": "B区-1层-08号",
+    "borrowCount": 89,
+    "status": "available"
+  },
+  {
+    "id": "book-004",
+    "title": "人类简史",
+    "author": "尤瓦尔·赫拉利",
+    "cover": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=book%20cover%20human%20history%20evolution%20from%20ape%20to%20space%20age%20artistic&image_size=square_hd",
+    "description": "从十万年前有生命迹象开始到21世纪资本、科技交织的人类发展史，理清影响人类发展的重大脉络，探索人类历史背后的深层逻辑。",
+    "categoryId": "cat-003",
+    "location": "C区-2层-15号",
+    "borrowCount": 178,
+    "status": "available"
+  },
+  {
+    "id": "book-005",
+    "title": "小王子",
+    "author": "安托万·德·圣-埃克苏佩里",
+    "cover": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=book%20cover%20the%20little%20prince%20stars%20planet%20rose%20dreamy%20illustration&image_size=square_hd",
+    "description": "这是一本足以让人永葆童心的不朽经典，被全球亿万读者誉为最值得收藏的书。以一位飞行员作为故事叙述者，讲述了小王子从自己星球出发前往地球的过程中，所经历的各种历险。",
+    "categoryId": "cat-005",
+    "location": "E区-1层-03号",
+    "borrowCount": 312,
+    "status": "borrowed"
+  },
+  {
+    "id": "book-006",
+    "title": "原则",
+    "author": "瑞·达利欧",
+    "cover": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=book%20cover%20business%20principles%20elegant%20minimal%20design%20blueprint&image_size=square_hd",
+    "description": "桥水基金创始人瑞·达利欧的一生智慧精髓，分享他的生活原则和工作原则，帮助读者在个人生活和职业生涯中做出更好的决策。",
+    "categoryId": "cat-006",
+    "location": "F区-1层-22号",
+    "borrowCount": 95,
+    "status": "available"
+  },
+  {
+    "id": "book-007",
+    "title": "山茶文具店",
+    "author": "小川系",
+    "cover": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=book%20cover%20japanese%20stationery%20shop%20warm%20cozy%20watercolor%20style&image_size=square_hd",
+    "description": "在镰仓，有一家帮人代笔的文具店，每代店主均由女性担任。故事讲述了夏花、蝉鸣、枫叶、白雪，12个月里的人间暖意。",
+    "categoryId": "cat-004",
+    "location": "D区-2层-07号",
+    "borrowCount": 67,
+    "status": "available"
+  },
+  {
+    "id": "book-008",
+    "title": "三体",
+    "author": "刘慈欣",
+    "cover": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=book%20cover%20sci-fi%20three%20body%20problem%20space%20stars%20alien%20world%20epic&image_size=square_hd",
+    "description": "中国科幻里程碑之作，讲述了地球人类文明和三体文明的信息交流、生死搏杀及两个文明在宇宙中的兴衰历程。",
+    "categoryId": "cat-002",
+    "location": "B区-3层-18号",
+    "borrowCount": 245,
+    "status": "borrowed"
+  },
+  {
+    "id": "book-009",
+    "title": "围城",
+    "author": "钱钟书",
+    "cover": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=book%20cover%20classic%20chinese%20novel%20fortress%20besieged%20vintage%20artistic&image_size=square_hd",
+    "description": "以讽刺的笔法描写抗战初期知识分子群像，被誉为\"新儒林外史\"。\"城里的人想出去，城外的人想进来\"的人生困境引人深思。",
+    "categoryId": "cat-001",
+    "location": "A区-1层-11号",
+    "borrowCount": 134,
+    "status": "available"
+  },
+  {
+    "id": "book-010",
+    "title": "深入浅出Vue.js",
+    "author": "刘博文",
+    "cover": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=book%20cover%20vue%20js%20frontend%20development%20green%20modern%20tech&image_size=square_hd",
+    "description": "从源码角度深入解析Vue.js的内部原理，涵盖响应式系统、虚拟DOM、模板编译等核心概念，是Vue开发者进阶的必读书籍。",
+    "categoryId": "cat-002",
+    "location": "B区-2层-04号",
+    "borrowCount": 78,
+    "status": "available"
+  },
+  {
+    "id": "book-011",
+    "title": "明朝那些事儿",
+    "author": "当年明月",
+    "cover": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=book%20cover%20ming%20dynasty%20chinese%20history%20ancient%20palace%20illustration&image_size=square_hd",
+    "description": "以史料为基础，以年代和具体人物为主线，并加入小说式的笔法，全景式展现明朝三百年历史风云。",
+    "categoryId": "cat-003",
+    "location": "C区-1层-28号",
+    "borrowCount": 189,
+    "status": "borrowed"
+  },
+  {
+    "id": "book-012",
+    "title": "中国菜谱大全",
+    "author": "中国烹饪协会",
+    "cover": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=book%20cover%20chinese%20cookbook%20delicious%20food%20dishes%20colorful%20appetizing&image_size=square_hd",
+    "description": "汇集全国各地特色菜肴，从家常小炒到宴席大菜，详细介绍食材配比、烹饪步骤和技巧要点，让你轻松成为厨房高手。",
+    "categoryId": "cat-004",
+    "location": "D区-1层-15号",
+    "borrowCount": 56,
+    "status": "available"
+  },
+  {
+    "id": "book-013",
+    "title": "安徒生童话",
+    "author": "汉斯·克里斯蒂安·安徒生",
+    "cover": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=book%20cover%20fairy%20tales%20mermaid%20castle%20magic%20dreamy%20children%20illustration&image_size=square_hd",
+    "description": "收录了《海的女儿》《丑小鸭》《卖火柴的小女孩》等经典童话，用诗意的语言讲述真善美，陪伴一代又一代孩子成长。",
+    "categoryId": "cat-005",
+    "location": "E区-2层-09号",
+    "borrowCount": 267,
+    "status": "available"
+  },
+  {
+    "id": "book-014",
+    "title": "穷查理宝典",
+    "author": "彼得·考夫曼",
+    "cover": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=book%20cover%20investment%20wisdom%20charles%20munger%20vintage%20library%20style&image_size=square_hd",
+    "description": "收录了查理·芒格最精华的思想和投资智慧，教你如何用多学科思维进行投资决策和人生规划，是价值投资者的必读之作。",
+    "categoryId": "cat-006",
+    "location": "F区-2层-06号",
+    "borrowCount": 112,
+    "status": "available"
+  },
+  {
+    "id": "book-015",
+    "title": "红楼梦",
+    "author": "曹雪芹",
+    "cover": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=book%20cover%20red%20chamber%20dream%20classic%20chinese%20literature%20elegant%20traditional&image_size=square_hd",
+    "description": "中国古典小说巅峰之作，以贾、史、王、薛四大家族的兴衰为背景，描绘了封建社会末期的众生相和一段凄美爱情。",
+    "categoryId": "cat-001",
+    "location": "A区-4层-01号",
+    "borrowCount": 198,
+    "status": "borrowed"
+  }
+]

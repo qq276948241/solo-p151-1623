@@ -1,0 +1,61 @@
+[
+  {
+    "id": "record-001",
+    "bookId": "book-002",
+    "userId": "user-001",
+    "borrowDate": "2026-06-10",
+    "dueDate": "2026-06-24",
+    "status": "borrowed"
+  },
+  {
+    "id": "record-002",
+    "bookId": "book-005",
+    "userId": "user-001",
+    "borrowDate": "2026-06-15",
+    "dueDate": "2026-06-29",
+    "status": "borrowed"
+  },
+  {
+    "id": "record-003",
+    "bookId": "book-008",
+    "userId": "user-001",
+    "borrowDate": "2026-06-20",
+    "dueDate": "2026-07-04",
+    "status": "borrowed"
+  },
+  {
+    "id": "record-004",
+    "bookId": "book-011",
+    "userId": "user-001",
+    "borrowDate": "2026-06-25",
+    "dueDate": "2026-07-09",
+    "status": "borrowed"
+  },
+  {
+    "id": "record-005",
+    "bookId": "book-015",
+    "userId": "user-001",
+    "borrowDate": "2026-06-01",
+    "dueDate": "2026-06-15",
+    "returnDate": "2026-06-14",
+    "status": "returned"
+  },
+  {
+    "id": "record-006",
+    "bookId": "book-001",
+    "userId": "user-001",
+    "borrowDate": "2026-05-20",
+    "dueDate": "2026-06-03",
+    "returnDate": "2026-06-02",
+    "status": "returned"
+  },
+  {
+    "id": "record-007",
+    "bookId": "book-004",
+    "userId": "user-001",
+    "borrowDate": "2026-05-05",
+    "dueDate": "2026-05-19",
+    "returnDate": "2026-05-18",
+    "status": "returned"
+  }
+]
