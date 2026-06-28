@@ -35,11 +35,11 @@ const goToBrowse = () => {
 
 <template>
   <div class="space-y-10">
-    <section class="text-center py-8 bg-gradient-to-b from-primary-50 to-transparent rounded-3xl -mx-4 -mt-8 px-4 pt-12">
-      <h1 class="text-3xl md:text-4xl font-serif font-bold text-primary-700 mb-3">
+    <section class="text-center py-8 bg-gradient-to-b from-primary-50 dark:from-primary-900/30 to-transparent rounded-3xl -mx-4 -mt-8 px-4 pt-12 transition-colors duration-300">
+      <h1 class="text-3xl md:text-4xl font-serif font-bold text-primary-700 dark:text-primary-200 mb-3">
         欢迎来到小区图书角
       </h1>
-      <p class="text-primary-500 max-w-xl mx-auto">
+      <p class="text-primary-500 dark:text-primary-400 max-w-xl mx-auto">
         在这里，每一本书都是一次心灵的旅行。探索我们的书架，发现属于你的故事。
       </p>
     </section>
@@ -63,9 +63,9 @@ const goToBrowse = () => {
           @click="handleBookClick(book)"
         />
       </div>
-      <div v-else class="bg-white rounded-xl p-8 text-center">
-        <BookOpen class="w-12 h-12 text-primary-300 mx-auto mb-3" />
-        <p class="text-primary-500">暂无正在借阅的书籍</p>
+      <div v-else class="bg-white dark:bg-[#1b2720] dark:border dark:border-primary-900 rounded-xl p-8 text-center transition-colors duration-300">
+        <BookOpen class="w-12 h-12 text-primary-300 dark:text-primary-700 mx-auto mb-3" />
+        <p class="text-primary-500 dark:text-primary-400">暂无正在借阅的书籍</p>
         <button class="btn-primary mt-4" @click="goToBrowse">去选书</button>
       </div>
     </section>
@@ -73,8 +73,8 @@ const goToBrowse = () => {
     <section>
       <div class="flex items-center justify-between mb-6">
         <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center">
-            <BookOpen class="w-5 h-5 text-primary-600" />
+          <div class="w-10 h-10 bg-primary-100 dark:bg-primary-900 rounded-xl flex items-center justify-center">
+            <BookOpen class="w-5 h-5 text-primary-600 dark:text-primary-300" />
           </div>
           <h2 class="section-title !mb-0 !border-0 !pb-0">可借书籍</h2>
           <span class="tag tag-available">{{ availableBooks.length }} 本</span>

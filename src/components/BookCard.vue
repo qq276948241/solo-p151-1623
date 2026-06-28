@@ -54,19 +54,19 @@ function handleClick() {
 
 <template>
   <div
-    class="book-card relative group"
+    class="book-card relative group transition-colors duration-300"
     :class="{ 'card-due-soon': showDueSoonWarning }"
     v-tooltip="book.description"
     @click="handleClick"
   >
-    <div class="aspect-[3/4] relative overflow-hidden bg-cream-200">
+    <div class="aspect-[3/4] relative overflow-hidden bg-cream-200 dark:bg-primary-900">
       <img
         :src="book.cover"
         :alt="book.title"
         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
       />
       <div
-        class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
       />
       <div
         class="absolute top-3 right-3 z-10"
@@ -96,14 +96,14 @@ function handleClick() {
     </div>
 
     <div class="p-4">
-      <h3 class="font-serif font-semibold text-primary-800 text-base mb-1 line-clamp-1 group-hover:text-primary-600 transition-colors">
+      <h3 class="font-serif font-semibold text-primary-800 dark:text-primary-100 text-base mb-1 line-clamp-1 group-hover:text-primary-600 dark:group-hover:text-primary-300 transition-colors">
         {{ book.title }}
       </h3>
-      <p class="text-sm text-primary-500 mb-2 line-clamp-1">
+      <p class="text-sm text-primary-500 dark:text-primary-400 mb-2 line-clamp-1">
         {{ book.author }}
       </p>
       
-      <div class="flex items-center text-xs text-primary-400 space-x-3">
+      <div class="flex items-center text-xs text-primary-400 dark:text-primary-500 space-x-3">
         <span v-if="showDueDate && borrowRecord" class="flex items-center space-x-1">
           <Calendar class="w-3 h-3" />
           <span>{{ formatDate(borrowRecord.dueDate) }}</span>
@@ -116,7 +116,7 @@ function handleClick() {
 
       <div
         v-if="showDueSoonWarning"
-        class="mt-3 flex items-center text-xs text-accent-red bg-red-50 px-2 py-1.5 rounded-lg"
+        class="mt-3 flex items-center text-xs text-accent-red dark:text-[#ff7a6b] bg-red-50 dark:bg-red-950/50 px-2 py-1.5 rounded-lg"
       >
         <AlertCircle class="w-4 h-4 mr-1.5 flex-shrink-0" />
         <span>请尽快归还，避免逾期</span>

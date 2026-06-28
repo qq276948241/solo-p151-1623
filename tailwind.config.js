@@ -44,13 +44,17 @@ export default {
         hover: '0 8px 24px rgba(45, 90, 61, 0.15)',
       },
       animation: {
-        'pulse-soft': 'pulse-soft 2s ease-in-out infinite',
+        'pulse-soft': 'pulse-soft-light 2s ease-in-out infinite',
         'float': 'float 3s ease-in-out infinite',
       },
       keyframes: {
-        'pulse-soft': {
-          '0%, 100%': { boxShadow: '0 0 0 0 rgba(192, 57, 43, 0.4)' },
-          '50%': { boxShadow: '0 0 0 8px rgba(192, 57, 43, 0)' },
+        'pulse-soft-light': {
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(192, 57, 43, 0.45)' },
+          '50%': { boxShadow: '0 0 0 10px rgba(192, 57, 43, 0)' },
+        },
+        'pulse-soft-dark': {
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(255, 99, 85, 0.6), 0 0 0 0 rgba(255, 99, 85, 0.25) inset' },
+          '50%': { boxShadow: '0 0 0 12px rgba(255, 99, 85, 0), 0 0 0 0 rgba(255, 99, 85, 0) inset' },
         },
         'float': {
           '0%, 100%': { transform: 'translateY(0)' },

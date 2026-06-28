@@ -1,23 +1,29 @@
 import type { Directive, DirectiveBinding } from 'vue'
 
+interface TooltipInstance {
+  tooltipEl: HTMLElement
+  hideTimer: ReturnType<typeof setTimeout> | null
+  hideInnerTimer: ReturnType<typeof setTimeout> | null
+  showTimer: ReturnType<typeof setTimeout> | null
+  rafId: number | null
+  mouseenterHandler: () => void
+  mouseleaveHandler: () => void
+}
+
 interface TooltipEl extends HTMLElement {
-  __tooltip_instance__?: {
-    tooltipEl: HTMLElement
-    hideTimer: ReturnType<typeof setTimeout> | null
-    showTimer: ReturnType<typeof setTimeout> | null
-    mouseenterHandler: (e: MouseEvent) => void
-    mouseleaveHandler: (e: MouseEvent) => void
-  }
+  __tooltip_instance__?: TooltipInstance
 }
 
 const TOOLTIP_OFFSET = 12
 const SHOW_DELAY = 200
 const HIDE_DELAY = 300
+const FADE_DURATION = 200
 const MAX_WIDTH = 280
 
 function createTooltipEl(content: string): HTMLElement {
   const el = document.createElement('div')
   el.className = 'v-tooltip'
+  el.setAttribute('aria-hidden', 'true')
   el.style.cssText = `
     position: fixed;
     z-index: 9999;
@@ -32,7 +38,7 @@ function createTooltipEl(content: string): HTMLElement {
     pointer-events: none;
     opacity: 0;
     transform: translateY(4px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition: opacity ${FADE_DURATION}ms ease, transform ${FADE_DURATION}ms ease;
     backdrop-filter: blur(6px);
     word-break: break-word;
   `
@@ -72,18 +78,33 @@ function calcPosition(targetEl: HTMLElement, tooltipEl: HTMLElement) {
 function showTooltip(el: TooltipEl) {
   const inst = el.__tooltip_instance__
   if (!inst) return
+  if (inst.showTimer) {
+    clearTimeout(inst.showTimer)
+    inst.showTimer = null
+  }
   if (inst.hideTimer) {
     clearTimeout(inst.hideTimer)
     inst.hideTimer = null
   }
+  if (inst.hideInnerTimer) {
+    clearTimeout(inst.hideInnerTimer)
+    inst.hideInnerTimer = null
+  }
+  if (inst.rafId !== null) {
+    cancelAnimationFrame(inst.rafId)
+    inst.rafId = null
+  }
+
   inst.showTimer = setTimeout(() => {
+    inst.showTimer = null
     const { tooltipEl } = inst
     if (!tooltipEl.isConnected) {
       document.body.appendChild(tooltipEl)
     }
     tooltipEl.style.visibility = 'hidden'
     tooltipEl.style.opacity = '0'
-    requestAnimationFrame(() => {
+    inst.rafId = requestAnimationFrame(() => {
+      inst.rafId = null
       const { left, top } = calcPosition(el, tooltipEl)
       tooltipEl.style.left = `${left}px`
       tooltipEl.style.top = `${top}px`
@@ -101,16 +122,50 @@ function hideTooltip(el: TooltipEl) {
     clearTimeout(inst.showTimer)
     inst.showTimer = null
   }
+  if (inst.rafId !== null) {
+    cancelAnimationFrame(inst.rafId)
+    inst.rafId = null
+  }
+  if (inst.hideTimer) {
+    clearTimeout(inst.hideTimer)
+  }
   inst.hideTimer = setTimeout(() => {
+    inst.hideTimer = null
     const { tooltipEl } = inst
     tooltipEl.style.opacity = '0'
     tooltipEl.style.transform = 'translateY(4px)'
-    setTimeout(() => {
+    inst.hideInnerTimer = setTimeout(() => {
+      inst.hideInnerTimer = null
       if (tooltipEl.isConnected) {
         tooltipEl.remove()
       }
-    }, 200)
+    }, FADE_DURATION)
   }, HIDE_DELAY)
+}
+
+function mountTooltip(el: TooltipEl, binding: DirectiveBinding<string>) {
+  const content = binding.value
+  if (!content) return
+
+  const tooltipEl = createTooltipEl(content)
+  const mouseenterHandler = () => showTooltip(el)
+  const mouseleaveHandler = () => hideTooltip(el)
+
+  el.__tooltip_instance__ = {
+    tooltipEl,
+    hideTimer: null,
+    hideInnerTimer: null,
+    showTimer: null,
+    rafId: null,
+    mouseenterHandler,
+    mouseleaveHandler
+  }
+
+  el.addEventListener('mouseenter', mouseenterHandler)
+  el.addEventListener('mouseleave', mouseleaveHandler)
+  if (!el.style.cursor || el.style.cursor === 'auto') {
+    el.style.cursor = 'pointer'
+  }
 }
 
 function cleanupInstance(el: TooltipEl) {
@@ -118,48 +173,39 @@ function cleanupInstance(el: TooltipEl) {
   if (!inst) return
   if (inst.showTimer) clearTimeout(inst.showTimer)
   if (inst.hideTimer) clearTimeout(inst.hideTimer)
-  if (inst.tooltipEl.isConnected) inst.tooltipEl.remove()
+  if (inst.hideInnerTimer) clearTimeout(inst.hideInnerTimer)
+  if (inst.rafId !== null) cancelAnimationFrame(inst.rafId)
+  if (inst.tooltipEl && inst.tooltipEl.isConnected) {
+    inst.tooltipEl.remove()
+  }
   el.removeEventListener('mouseenter', inst.mouseenterHandler)
   el.removeEventListener('mouseleave', inst.mouseleaveHandler)
   el.__tooltip_instance__ = undefined
 }
 
-export const vTooltip: Directive = {
-  mounted(el: TooltipEl, binding: DirectiveBinding<string>) {
-    const content = binding.value
-    if (!content) return
-
-    const tooltipEl = createTooltipEl(content)
-
-    const mouseenterHandler = () => showTooltip(el)
-    const mouseleaveHandler = () => hideTooltip(el)
-
-    el.__tooltip_instance__ = {
-      tooltipEl,
-      hideTimer: null,
-      showTimer: null,
-      mouseenterHandler,
-      mouseleaveHandler
-    }
-
-    el.addEventListener('mouseenter', mouseenterHandler)
-    el.addEventListener('mouseleave', mouseleaveHandler)
-    el.style.cursor = el.style.cursor || 'pointer'
+export const vTooltip: Directive<TooltipEl, string> = {
+  mounted(el, binding) {
+    mountTooltip(el, binding)
   },
 
-  updated(el: TooltipEl, binding: DirectiveBinding<string>) {
+  updated(el, binding) {
     const inst = el.__tooltip_instance__
-    if (!inst) return
+    if (!inst) {
+      if (binding.value) {
+        mountTooltip(el, binding)
+      }
+      return
+    }
     if (binding.value !== binding.oldValue) {
-      inst.tooltipEl.textContent = binding.value || ''
+      if (!binding.value) {
+        cleanupInstance(el)
+        return
+      }
+      inst.tooltipEl.textContent = binding.value
     }
   },
 
-  beforeUnmount(el: TooltipEl) {
-    cleanupInstance(el)
-  },
-
-  unmounted(el: TooltipEl) {
+  unmounted(el) {
     cleanupInstance(el)
   }
 }
